@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller {
 
@@ -16,10 +17,26 @@ class HomeController extends Controller {
         return "welcome to gym by easy";
     }
 
+//
+//    public function gymList() {
+//        $gymList  = ["superHero","superMokey","东田健身","火辣健身"];
+//        return json_encode($gymList);
+//    }
 
-    public function gymList() {
-        $gymList  = ["superHero","superMokey","东田健身","火辣健身"];
-        return json_encode($gymList);
+
+    /**
+     * 显示应用程序中所有用户的列表。
+     *
+     * @return Response
+     */
+    public function gymList()
+    {
+        $users = DB::select('select * from `user`', []);
+
+
+        foreach ($users as $user) {
+            echo $user->user_id;
+            echo $user->res;
+        }
     }
-
 }
